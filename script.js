@@ -30,7 +30,18 @@ function updatePlayIcon(){
 }
 // Function to   update progress
 function updateProgress(){
-    console.log(video.currentTime)
+    progress.value=(video.currentTime/video.duration)*100;
+
+    //Set time for timestamp
+    let mins=Math.floor(video.currentTime/60);
+    if(mins<10){
+        mins="0"+String(mins);   // We have converted min to string as string can not be added to number value
+    }
+    let secs=Math.floor(video.currentTime % 60);// Check why we have done this
+    if (secs<10){
+        secs="0"+String(secs);
+    }
+    timestamp.innerHTML= `${mins}:${secs}` ; //
 }
 
 // Function to stop video
@@ -41,7 +52,7 @@ function stopVideo(){
 
 //Set Video progress fucntion using slider
 function setVideoProgress(){
-    return true;
+    video.currentTime=+(progress.value * video.duration)/100;
 }
 
 // Evenrt Listener
